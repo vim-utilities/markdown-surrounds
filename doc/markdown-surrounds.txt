@@ -1,0 +1,211 @@
+*markdown-surrounds.txt*     For Vim version 8.0.     Last change: 2020 Nov 26
+
+
+                    MarkDown Surrounds         by S0AndS0
+
+
+MarkDown Surrounds                                        *markdown-surrounds*
+
+1. Normal mode defaults                            |markdown-surrounds-normal|
+2. Functions                                    |markdown-surrounds-functions|
+3. Configuration                            |markdown-surrounds-configuration|
+4. Notes                                            |markdown-surrounds-notes|
+
+==============================================================================
+1. Normal mode defaults                            *markdown-surrounds-normal*
+
+                                *b*
+<Leader>b                       Toggle bold state of word under cursor.
+                                Example input >
+                                   Spam
+<
+                                Example output >
+                                   **Spam**
+<
+                                *B*
+<Leader>B                       Toggle bold state of line under cursor.
+                                Example input >
+                                   1. Ham in a can
+<
+                                Example output >
+                                   1. **Ham in a can**
+<
+                                *i*
+<Leader>i                       Toggle italic state of word under cursor.
+                                Example input >
+                                   _Spam_
+<
+                                Example output >
+                                   Spam
+<
+                                *I*
+<Leader>I                       Toggle italic state of line under cursor.
+                                Example input >
+                                   > - *Ham in a can*
+<
+                                Example output >
+                                   > - Ham in a can
+<
+                                *st*
+<Leader>st                      Toggle strike-through state of current word.
+                                Example input >
+                                   Spam
+<
+                                Example output >
+                                   ~~Spam~~
+<
+                                *ST*
+<Leader>ST                      Toggle strike-through state current line.
+                                Example input >
+                                   ~~Ham in a can~~
+<
+                                Example output >
+                                   Ham in a can
+<
+
+==============================================================================
+2. Functions                                    *markdown-surrounds-functions*
+
+MarkDown_Surrounds__Current_Word({dict-or-string})
+                       Toggles state for current word under cursor. If
+                       argument is {string} type, then it should point to a key
+                       within the `g:markdown_surrounds` dictionary.
+                       Example >
+   :call MarkDown_Surrounds__Current_Word('bold')
+<
+
+MarkDown_Surrounds__Current_Line({dict-or-string})
+                       Toggles state for current line under cursor. If argument
+                       is {dictionary} type, then it should be shaped similar
+                       to named entries within `g:markdown_surrounds` config.
+                       Example from `italic` configurations  >
+   :call MarkDown_Surrounds__Current_Line({
+         \   'preferred_index': 1,
+         \   'nnoremap': {
+         \     'word': '<Leader>i',
+         \     'line': '<Leader>I',
+         \   },
+         \   'patterns': [
+         \     {
+         \       'regexp': '\*',
+         \       'characters': '*',
+         \     },
+         \     {
+         \       'regexp': '_',
+         \       'characters': '_',
+         \     },
+         \   ],
+         \ })
+<
+
+==============================================================================
+3. Configuration                            *markdown-surrounds-configuration*
+
+                       The `g:markdown_surrounds` variable may be a dictionary
+                       or path to JSON file. In either case customizations are
+                       merged with defaults such that settings may be adjusted
+                       on a per-key/value basis.
+
+                       Example customization of `preferred_index` only >
+   let g:markdown_surrounds = {
+     \   'elements': {
+     \     'bold': {
+     \       'preferred_index': 0,
+     \     },
+     \     'italic': {
+     \       'preferred_index': 1,
+     \     },
+     \   },
+     \ }
+<
+                       Example full configuration >
+   let g:markdown_surrounds = {
+     \   'file_extensions': [
+     \     'markdown',
+     \     'md',
+     \   ],
+     \   'elements': {
+     \     'bold': {
+     \       'preferred_index': 0,
+     \       'nnoremap': {
+     \         'word': '<Leader>b',
+     \         'line': '<Leader>B',
+     \       },
+     \       'patterns': [
+     \         {
+     \           'regexp': '\*\*',
+     \           'characters': '**',
+     \         },
+     \         {
+     \           'regexp': '__',
+     \           'characters': '__',
+     \         },
+     \       ],
+     \     },
+     \     'italic': {
+     \       'preferred_index': 1,
+     \       'nnoremap': {
+     \         'word': '<Leader>i',
+     \         'line': '<Leader>I',
+     \       },
+     \       'patterns': [
+     \         {
+     \           'regexp': '\*',
+     \           'characters': '*',
+     \         },
+     \         {
+     \           'regexp': '_',
+     \           'characters': '_',
+     \         },
+     \       ],
+     \     },
+     \     'strikethrough': {
+     \       'preferred_index': 0,
+     \       'nnoremap': {
+     \         'word': '<Leader>st',
+     \         'line': '<Leader>ST',
+     \       },
+     \       'patterns': [
+     \         {
+     \           'regexp': '\~\~',
+     \           'characters': '~~',
+     \         },
+     \       ],
+     \     },
+     \   },
+     \ }
+<
+
+==============================================================================
+4. Notes                                            *markdown-surrounds-notes*
+
+                       Currently when toggling state of words `<cWORD>` is used
+                       for obtaining the _big-word_ that the cursor is on. This
+                       means punctuation and non-letter symbols are included
+                       when toggling state. For example toggling bold state of
+                       an existing italic word.
+                       Example italic word toggling results >
+   Spam _flavored_ ham
+<
+                       Example bolding italic word toggling results >
+   Spam **_flavored_** ham
+<
+                       This also means that currently to toggle italic state
+                       again requires first toggling bold state, ie. order of
+                       operations is outer-to-inner.
+                       Example out-of-order italic toggling results >
+   Spam _**_flavored_**_ ham
+<
+                       To obtain an un-formatted word from above example would
+                       then require the following sequence of commands.
+<Leader>i >
+   Spam **_flavored_** ham
+<
+<Leader>b >
+   Spam _flavored_ ham
+<
+<Leader>i >
+   Spam flavored ham
+<
+
+ vim:tw=78:ts=8:ft=help:norl:
