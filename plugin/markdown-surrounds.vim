@@ -201,7 +201,10 @@ function! s:MarkDown_Surrounds__Toggle_Word(key_configuration, ...) abort
     let l:current_word = a:000[0]
   endif
 
-  if ( l:current_file_extension != 'md' || l:current_file_type != 'markdown' )
+  if (
+  \    index(g:markdown_surrounds.file_extensions, l:current_file_type) < 0
+  \   || index(g:markdown_surrounds.file_extensions, l:current_file_extension) < 0
+  \   )
   \ || len(l:current_word) == 0
     return
   endif
@@ -276,7 +279,10 @@ function! MarkDown_Surrounds__Current_Word(key_configuration) abort
   let l:current_file_type = &filetype
   let l:current_word = expand('<cWORD>')
 
-  if ( l:current_file_extension != 'md' || l:current_file_type != 'markdown' )
+  if (
+  \    index(g:markdown_surrounds.file_extensions, l:current_file_type) < 0
+  \   || index(g:markdown_surrounds.file_extensions, l:current_file_extension) < 0
+  \   )
   \ || len(l:current_word) == 0
     return
   endif
@@ -356,7 +362,10 @@ function! s:MarkDown_Surrounds__Toggle_Line(key_configuration, ...) abort
     let l:current_line = a:000[0]
   endif
 
-  if ( l:current_file_extension != 'md' || l:current_file_type != 'markdown' )
+  if (
+  \    index(g:markdown_surrounds.file_extensions, l:current_file_type) < 0
+  \   || index(g:markdown_surrounds.file_extensions, l:current_file_extension) < 0
+  \   )
   \ || len(l:current_line) == 0
     return
   endif
@@ -463,7 +472,10 @@ function! MarkDown_Surrounds__Current_Line(key_configuration) abort
   let l:current_file_type = &filetype
   let l:current_line = getline('.')
 
-  if ( l:current_file_extension != 'md' || l:current_file_type != 'markdown' )
+  if (
+  \    index(g:markdown_surrounds.file_extensions, l:current_file_type) < 0
+  \   || index(g:markdown_surrounds.file_extensions, l:current_file_extension) < 0
+  \   )
   \ || len(l:current_line) == 0
     return
   endif
