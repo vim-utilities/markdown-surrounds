@@ -71,7 +71,7 @@ MarkDown_Surrounds__Current_Word({dict-or-string})
                        argument is {string} type, then it should point to a key
                        within the `g:markdown_surrounds` dictionary.
                        Example >
-   :call MarkDown_Surrounds__Current_Word('bold')
+    :call MarkDown_Surrounds__Current_Word('bold')
 <
 
 MarkDown_Surrounds__Current_Line({dict-or-string})
@@ -79,23 +79,23 @@ MarkDown_Surrounds__Current_Line({dict-or-string})
                        is {dictionary} type, then it should be shaped similar
                        to named entries within `g:markdown_surrounds` config.
                        Example from `italic` configurations  >
-   :call MarkDown_Surrounds__Current_Line({
-         \   'preferred_index': 1,
-         \   'nnoremap': {
-         \     'word': '<Leader>i',
-         \     'line': '<Leader>I',
-         \   },
-         \   'patterns': [
-         \     {
-         \       'regexp': '\*',
-         \       'characters': '*',
-         \     },
-         \     {
-         \       'regexp': '_',
-         \       'characters': '_',
-         \     },
-         \   ],
-         \ })
+    :call MarkDown_Surrounds__Current_Line({
+          \   'preferred_index': 1,
+          \   'nnoremap': {
+          \     'word': '<Leader>i',
+          \     'line': '<Leader>I',
+          \   },
+          \   'patterns': [
+          \     {
+          \       'regexp': '\*',
+          \       'characters': '*',
+          \     },
+          \     {
+          \       'regexp': '_',
+          \       'characters': '_',
+          \     },
+          \   ],
+          \ })
 <
 
 ==============================================================================
@@ -107,73 +107,86 @@ MarkDown_Surrounds__Current_Line({dict-or-string})
                        on a per-key/value basis.
 
                        Example customization of `preferred_index` only >
-   let g:markdown_surrounds = {
-     \   'elements': {
-     \     'bold': {
-     \       'preferred_index': 0,
-     \     },
-     \     'italic': {
-     \       'preferred_index': 1,
-     \     },
-     \   },
-     \ }
+    let g:markdown_surrounds = {
+          \   'elements': {
+          \     'bold': {
+          \       'preferred_index': 0,
+          \     },
+          \     'italic': {
+          \       'preferred_index': 1,
+          \     },
+          \   },
+          \ }
 <
                        Example full configuration >
-   let g:markdown_surrounds = {
-     \   'file_extensions': [
-     \     'markdown',
-     \     'md',
-     \   ],
-     \   'elements': {
-     \     'bold': {
-     \       'preferred_index': 0,
-     \       'nnoremap': {
-     \         'word': '<Leader>b',
-     \         'line': '<Leader>B',
-     \       },
-     \       'patterns': [
-     \         {
-     \           'regexp': '\*\*',
-     \           'characters': '**',
-     \         },
-     \         {
-     \           'regexp': '__',
-     \           'characters': '__',
-     \         },
-     \       ],
-     \     },
-     \     'italic': {
-     \       'preferred_index': 1,
-     \       'nnoremap': {
-     \         'word': '<Leader>i',
-     \         'line': '<Leader>I',
-     \       },
-     \       'patterns': [
-     \         {
-     \           'regexp': '\*',
-     \           'characters': '*',
-     \         },
-     \         {
-     \           'regexp': '_',
-     \           'characters': '_',
-     \         },
-     \       ],
-     \     },
-     \     'strikethrough': {
-     \       'preferred_index': 0,
-     \       'nnoremap': {
-     \         'word': '<Leader>st',
-     \         'line': '<Leader>ST',
-     \       },
-     \       'patterns': [
-     \         {
-     \           'regexp': '\~\~',
-     \           'characters': '~~',
-     \         },
-     \       ],
-     \     },
-     \   },
-     \ }
+    let g:markdown_surrounds = {
+          \   'file_extensions': [
+          \     'markdown',
+          \     'md',
+          \   ],
+          \   'elements': {
+          \     'bold': {
+          \       'preferred_index': 0,
+          \       'nnoremap': {
+          \         'word': '<Leader>b',
+          \         'line': '<Leader>B',
+          \       },
+          \       'patterns': [
+          \         {
+          \           'regexp': '\*\*',
+          \           'characters': '**',
+          \         },
+          \         {
+          \           'regexp': '__',
+          \           'characters': '__',
+          \         },
+          \       ],
+          \     },
+          \     'italic': {
+          \       'preferred_index': 1,
+          \       'nnoremap': {
+          \         'word': '<Leader>i',
+          \         'line': '<Leader>I',
+          \       },
+          \       'patterns': [
+          \         {
+          \           'regexp': '\*',
+          \           'characters': '*',
+          \         },
+          \         {
+          \           'regexp': '_',
+          \           'characters': '_',
+          \         },
+          \       ],
+          \     },
+          \     'highlight': {
+          \       'preferred_index': 0,
+          \       'nnoremap': {
+          \         'word': '<Leader>hi',
+          \         'line': '<Leader>HI',
+          \       },
+          \       'patterns': [
+          \         {
+          \           'regexp': '==',
+          \           'characters': '==',
+          \         },
+          \       ],
+          \     },
+          \     'strikethrough': {
+          \       'preferred_index': 0,
+          \       'nnoremap': {
+          \         'word': '<Leader>st',
+          \         'line': '<Leader>ST',
+          \       },
+          \       'patterns': [
+          \         {
+          \           'regexp': '\~\~',
+          \           'characters': '~~',
+          \         },
+          \       ],
+          \     },
+          \   },
+          \ }
 <
 
 ==============================================================================
@@ -185,27 +198,27 @@ MarkDown_Surrounds__Current_Line({dict-or-string})
                        when toggling state. For example toggling bold state of
                        an existing italic word.
                        Example italic word toggling results >
-   Spam _flavored_ ham
+    Spam _flavored_ ham
 <
                        Example bolding italic word toggling results >
-   Spam **_flavored_** ham
+    Spam **_flavored_** ham
 <
                        This also means that currently to toggle italic state
                        again requires first toggling bold state, ie. order of
                        operations is outer-to-inner.
                        Example out-of-order italic toggling results >
-   Spam _**_flavored_**_ ham
+    Spam _**_flavored_**_ ham
 <
                        To obtain an un-formatted word from above example would
                        then require the following sequence of commands.
 <Leader>i >
-   Spam **_flavored_** ham
+    Spam **_flavored_** ham
 <
 <Leader>b >
-   Spam _flavored_ ham
+    Spam _flavored_ ham
 <
 <Leader>i >
-   Spam flavored ham
+    Spam flavored ham
 <
 
  vim:tw=78:ts=8:ft=help:norl:
