@@ -209,6 +209,11 @@ function! s:MarkDown_Surrounds__Toggle_Word(key_configuration, ...) abort
     return
   endif
 
+  " if ( l:current_file_extension != 'md' || l:current_file_type != 'markdown' )
+  " \ || len(l:current_word) == 0
+  "   return
+  " endif
+
   if type(a:key_configuration) == type({})
     let l:configuration = a:key_configuration
   elseif type(a:key_configuration) == type('')
@@ -286,6 +291,11 @@ function! MarkDown_Surrounds__Current_Word(key_configuration) abort
   \ || len(l:current_word) == 0
     return
   endif
+
+  " if ( l:current_file_extension != 'md' || l:current_file_type != 'markdown' )
+  " \ || len(l:current_word) == 0
+  "   return
+  " endif
 
   let l:new_word = s:MarkDown_Surrounds__Toggle_Word(a:key_configuration, l:current_word)
   if len(l:new_word) == 0
@@ -369,6 +379,11 @@ function! s:MarkDown_Surrounds__Toggle_Line(key_configuration, ...) abort
   \ || len(l:current_line) == 0
     return
   endif
+
+  " if ( l:current_file_extension != 'md' || l:current_file_type != 'markdown' )
+  " \ || len(l:current_line) == 0
+  "   return
+  " endif
 
   let l:matched__blockquote = matchstr(l:current_line, '^>*')
   if len(l:matched__blockquote) == 0
@@ -479,6 +494,11 @@ function! MarkDown_Surrounds__Current_Line(key_configuration) abort
   \ || len(l:current_line) == 0
     return
   endif
+
+  " if ( l:current_file_extension != 'md' || l:current_file_type != 'markdown' )
+  " \ || len(l:current_line) == 0
+  "   return
+  " endif
 
   let l:new_line = s:MarkDown_Surrounds__Toggle_Line(a:key_configuration, l:current_line)
   if len(l:new_line) == 0

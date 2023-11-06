@@ -46,6 +46,22 @@ MarkDown Surrounds                                        *markdown-surrounds*
                                 Example output >
                                    > - Ham in a can
 <
+                                *hi*
+<Leader>hi                      Toggle highlight state of current word.
+                                Example input >
+                                   Spam
+<
+                                Example output >
+                                   ==Spam==
+<
+                                *HI*
+<Leader>HI                      Toggle highlight state current line.
+                                Example input >
+                                   ==Ham in a can==
+<
+                                Example output >
+                                   Ham in a can
+<
                                 *st*
 <Leader>st                      Toggle strike-through state of current word.
                                 Example input >
